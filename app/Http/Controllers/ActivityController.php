@@ -9,7 +9,6 @@ class ActivityController extends Controller
     public function index()
     {
         $activities = Activity::all();
-
         return view('activity.index', compact('activities'));
     }
 
@@ -23,7 +22,26 @@ class ActivityController extends Controller
             'cor' => 'nullable|string|max:7',
         ]);
 
-        Activity::createActivity($validatedData);
+        Activity::create($validatedData);
+        return redirect()->route('activity.index');
+    }
+
+    public function edit(Activity $activity)
+    {
+        return view('activity.edit_index', compact('activity'));
+    }
+
+    public function update(Request $request, Activity $activity)
+    {
+        $validatedData = $request->validate([
+            'titulo' => 'required|string|max:255',
+            'data' => 'required|date',
+            'hora' => 'required|nullable|string',
+            'descricao' => 'nullable|string',
+            'cor' => 'nullable|string|max:7',
+        ]);
+
+        $activity->update($validatedData);
         return redirect()->route('activity.index');
     }
 }
