@@ -24,6 +24,17 @@
         <label for="descricao" class="block text-sm font-medium text-gray-700">Descrição:</label>
         <textarea name="descricao" id="descricao" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ old('descricao', $activity->descricao) }}</textarea>
     </div>
-    <br>
-    <button type="submit" style="background-color: #2eb3a1; color: white; border: 1px solid #48bb78; padding: 8px 16px; border-radius: 8px;">Atualizar Atividade</button>
+    <div class="flex justify-between mt-4">
+        <button type="submit" style="background-color: #2eb3a1; color: white; border: 1px solid #48bb78; padding: 8px 16px; border-radius: 8px;">
+            Atualizar Atividade
+        </button>
+
+        <form action="{{ route('activity.destroy', $activity) }}" method="POST";>
+            @csrf
+            @method('DELETE')
+            <button type="submit" style="background-color: #e53e3e; color: white; border: 1px solid #c53030; padding: 8px 16px; border-radius: 8px;">
+                Excluir
+            </button>
+        </form>
+    </div>
 </form>

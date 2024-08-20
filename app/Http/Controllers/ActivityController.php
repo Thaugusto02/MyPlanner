@@ -44,4 +44,10 @@ class ActivityController extends Controller
         $activity->update($validatedData);
         return redirect()->route('activity.index');
     }
+    
+    public function destroy(Activity $activity)
+    {
+        $activity->delete();
+        return redirect()->route('activity.index');
+    }
 }
